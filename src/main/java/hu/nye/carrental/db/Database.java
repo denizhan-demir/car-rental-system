@@ -3,6 +3,8 @@ package hu.nye.carrental.db;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -31,10 +33,18 @@ public final class Database {
         return conn;
     }
 
-    /** Creates the tables. Safe to call on every start (CREATE TABLE IF NOT EXISTS). */
+    /**
+     * Creates the tables (safe on every start) and, on the very first start,
+     * fills the database with sample data.
+     */
     public static void init() {
+        // must be checked before connecting, because connecting creates the file
+        boolean firstStart = !Files.exists(Paths.get(FILE_NAME));
         try (Connection conn = getConnection()) {
             runScript(conn, "/db/schema.sql");
+            if (firstStart) {
+                runScript(conn, "/db/seed.sql");
+            }
         } catch (IOException | SQLException e) {
             throw new RuntimeException("Could not initialize the database", e);
         }
