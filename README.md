@@ -6,6 +6,16 @@ Semester project for **BAI0168 – The Technology and Methodology of System Deve
 A desktop application for a small car rental office. It keeps track of cars, customers and rentals,
 shows which cars are available, and calculates the price when a car is returned.
 
+**Documentation:** [User guide](docs/USER_GUIDE.md) · [Database design](docs/database.md)
+
+## Features
+
+- Brands and categories: create, list, rename, delete
+- Cars: create, list, edit, delete, search; availability status calculated from the rentals
+- Customers: create, list, edit, delete, search
+- Rentals: create, return a car with automatic price calculation, delete; active / overdue / closed status
+- Sample data on the first start, light and dark theme
+
 ## Team
 
 | Member | Responsibility |
