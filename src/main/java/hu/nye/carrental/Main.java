@@ -4,8 +4,8 @@ import hu.nye.carrental.db.Database;
 import hu.nye.carrental.ui.BrandCategoryPanel;
 import hu.nye.carrental.ui.CarPanel;
 import hu.nye.carrental.ui.CustomerPanel;
-import hu.nye.carrental.ui.MutedLabel;
 import hu.nye.carrental.ui.Refreshable;
+import hu.nye.carrental.ui.RentalPanel;
 import hu.nye.carrental.ui.Styles;
 import hu.nye.carrental.ui.Theme;
 
@@ -15,9 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -37,7 +35,7 @@ public class Main {
         Theme.applySaved(); // must happen before any window is created
 
         JTabbedPane tabs = new JTabbedPane();
-        tabs.addTab("Rentals", comingSoon("Rentals"));
+        tabs.addTab("Rentals", new RentalPanel());
         tabs.addTab("Cars", new CarPanel());
         tabs.addTab("Customers", new CustomerPanel());
         tabs.addTab("Brands & Categories", new BrandCategoryPanel());
@@ -79,15 +77,6 @@ public class Main {
         c.anchor = GridBagConstraints.EAST;
         c.insets = new Insets(0, 0, 0, 16);
         panel.add(button, c);
-        return panel;
-    }
-
-    /** Temporary tab content, replaced step by step with the real screens. */
-    private static JPanel comingSoon(String name) {
-        JPanel panel = new JPanel(new BorderLayout());
-        MutedLabel label = new MutedLabel(name + " screen - coming soon");
-        label.setHorizontalAlignment(SwingConstants.CENTER);
-        panel.add(label, BorderLayout.CENTER);
         return panel;
     }
 }
