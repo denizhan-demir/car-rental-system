@@ -1,0 +1,12 @@
+# Build output
+target/
+out/
+
+# Local database - every computer creates its own on first start
+*.db
+
+# IDE and system files
+.idea/
+*.iml
+.vscode/
+.DS_Store
