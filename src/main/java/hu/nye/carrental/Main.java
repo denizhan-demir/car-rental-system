@@ -1,6 +1,7 @@
 package hu.nye.carrental;
 
 import hu.nye.carrental.db.Database;
+import hu.nye.carrental.ui.BrandCategoryPanel;
 import hu.nye.carrental.ui.MutedLabel;
 import hu.nye.carrental.ui.Refreshable;
 import hu.nye.carrental.ui.Styles;
@@ -37,7 +38,7 @@ public class Main {
         tabs.addTab("Rentals", comingSoon("Rentals"));
         tabs.addTab("Cars", comingSoon("Cars"));
         tabs.addTab("Customers", comingSoon("Customers"));
-        tabs.addTab("Brands & Categories", comingSoon("Brands & Categories"));
+        tabs.addTab("Brands & Categories", new BrandCategoryPanel());
 
         // FlatLaf feature: app name on the left of the tabs, theme switch on the right
         JLabel appName = Styles.font(new JLabel("Car Rental"), "h3");
