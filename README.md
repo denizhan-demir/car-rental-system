@@ -37,6 +37,16 @@ or run `mvn compile exec:java` in the project folder.
 
 The database file `carrental.db` is created automatically in the project folder on the first start.
 
+## Tests
+
+The tests are in `src/test/java` (JUnit 5). Run them with `mvn test`, or in IntelliJ IDEA
+right-click `src/test/java` → **Run 'All Tests'**.
+
+- Unit tests check the business rules: the price calculation and the rental status (Active / Overdue / Closed).
+- Database tests check every DAO (create, read, update, delete) and the database rules: unique plate and
+  license numbers, records in use cannot be deleted, a car cannot be rented twice.
+  Each of them runs on a new temporary database with the sample data, so `carrental.db` is never changed.
+
 ## Project structure
 
     src/main/java/hu/nye/carrental/
@@ -46,6 +56,7 @@ The database file `carrental.db` is created automatically in the project folder 
     ├── dao/        – SQL queries for each table (CRUD)          (Backend)
     ├── service/    – business rules, e.g. price calculation     (Backend)
     └── ui/         – screens, tables and forms                  (Frontend)
+    src/test/java/hu/nye/carrental/ – JUnit tests                (Backend)
     src/main/resources/db/
     ├── schema.sql  – database tables                            (Database)
     └── seed.sql    – sample data for the first start            (Database)

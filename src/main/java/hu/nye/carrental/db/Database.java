@@ -19,13 +19,23 @@ import java.util.stream.Collectors;
 public final class Database {
 
     public static final String FILE_NAME = "carrental.db";
-    private static final String URL = "jdbc:sqlite:" + FILE_NAME;
+
+    /**
+     * System property for using another database file. The tests set it, so they work
+     * on a fresh temporary database and never touch the real carrental.db.
+     */
+    public static final String FILE_PROPERTY = "carrental.db.file";
 
     private Database() {
     }
 
+    /** The database file in use: carrental.db, unless FILE_PROPERTY says otherwise. */
+    private static String fileName() {
+        return System.getProperty(FILE_PROPERTY, FILE_NAME);
+    }
+
     public static Connection getConnection() throws SQLException {
-        Connection conn = DriverManager.getConnection(URL);
+        Connection conn = DriverManager.getConnection("jdbc:sqlite:" + fileName());
         // SQLite ignores foreign keys unless this is switched on for every connection
         try (Statement st = conn.createStatement()) {
             st.execute("PRAGMA foreign_keys = ON");
@@ -39,7 +49,7 @@ public final class Database {
      */
     public static void init() {
         // must be checked before connecting, because connecting creates the file
-        boolean firstStart = !Files.exists(Paths.get(FILE_NAME));
+        boolean firstStart = !Files.exists(Paths.get(fileName()));
         try (Connection conn = getConnection()) {
             runScript(conn, "/db/schema.sql");
             if (firstStart) {
