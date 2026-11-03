@@ -32,10 +32,23 @@
             <artifactId>slf4j-nop</artifactId>
             <version>1.7.36</version>
         </dependency>
+        <!-- JUnit 5 for the tests in src/test/java (only used by "mvn test", not by the app) -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <!-- runs the JUnit 5 tests; Maven's built-in default version is too old for JUnit 5 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+            </plugin>
             <!-- lets you start the app with: mvn compile exec:java -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
